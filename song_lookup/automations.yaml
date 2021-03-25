@@ -1,0 +1,20 @@
+- id: songs_radio_lounge
+  alias: songs_radio_lounge
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: media_player.lounge
+    to: playing
+    for:
+      seconds: 5
+  condition: []
+  action:
+  - repeat:
+      while:
+      - condition: state
+        entity_id: media_player.lounge
+        state: playing
+      sequence:
+      - service: script.song_lookup_lounge
+      - delay: 0:0:10
+  mode: single

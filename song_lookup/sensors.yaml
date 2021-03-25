@@ -1,0 +1,8 @@
+  - platform: scrape
+    resource: https://onlineradiobox.com/be/r1/playlist/?lang=nl
+    name: Radio 1
+    select: "#bodyW > div.page > div > div.page__wrapper-4right > div > section > table > tbody > tr"
+    value_template: >
+        {% set time = value | truncate(6, true, '') %}
+        {{ value | replace(time, '') }}
+    scan_interval: 86400

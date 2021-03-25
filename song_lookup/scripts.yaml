@@ -1,0 +1,10 @@
+song_lookup_lounge:
+  alias: Looking up songs
+  sequence:
+  - service: homeassistant.update_entity
+    target:
+      entity_id: >
+	{% if is_state_attr('media_player.lounge', 'media_title', 'Radio 1') %} sensor.radio_1 
+	{% elif is_state_attr('media_player.lounge', 'media_title', 'Qmusic') %} sensor.qmusic 
+        {% endif %}
+  mode: single
