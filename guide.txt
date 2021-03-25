@@ -1,0 +1,63 @@
+First we need to get the setup for the radio stations working, optional there is a way to change the volume. To finish this guide, there is a way to see which song is playing.
+We need to make a distinction between the devices you're using were you want to play the radio on. 
+	CHROMECAST/Nest audio
+	  1) PLAYING RADIO STREAM ON CHROMECAST/Nest audio
+		1.1)Make 2 helpers. The first helper is to choose the radio station, the second is for the device you want to play your radio on.
+			This can be done in 2 ways. If you want to use the code, it can be found in the CHROMECAST directory > helpers.yaml. Add this code to your configuration.yaml and add your wanted devices/radio stations. 
+			The other way is by going to Settings>Helpers>ADD HELPER and choosing 2 times input select. The first for the radio station, the second for media players.
+			Like you can see in the code, you have to add your options. You can use good looking names, it doesn't have to do anything with your media player or radio station stream.
+		
+		1.2)Now, let's make a script. The code can be found in the CHROMECAST directory > scripts.yaml. Here you maybe need to add/change some if or elif statements depending on the options you've chosen at the helpers.
+			For the Chromecast setup, you need URLs ending on .mp3 or other media types from the radio station you've added. Depending on the media type of the radio station, you have to change media_content_type to something different. (https://www.home-assistant.io/integrations/media_player/)
+			In order to get the good looking mediaplayer card, we're going to use the logo from the radio stations to display. 
+		
+		1.3)Download the .jpg or .png (maybe change the name of the file to an easy name) from the logo and place them in the \configuration\www folder from your Home Assistant instance.
+			I've made a seperate folder in the \www directory, called "radio", so there is a good overview. So my directory structure looks like \configuration\www\radio .  
+			Change/add your radio stations with the directory structure that's leading to the picture of the corresponding radio sation. 
+			You can check if the directory is correct by going to a webbrowser, entering the URL of your Home Assistant and add for example "/local/radio/Radio_1.png". The logo should pop up.
+			
+		1.4)The last thing about the script is the name you want to display in your mediaplayer card. Change/add there the radio stations that you want.
+		
+	  2) OPTIONAL: change the volume of your CHROMECAST/Nest audio
+		2.1)If you want to change the volume of your Chromecast/Nest audio, you'll need an extra helper. This code can be found in CHROMECAST > volume-helper.yaml. 
+			Paste it in your configuration.yaml. Or make an helper by going to Settings>Helpers>ADD HELPER and choose Numeric. Minimum value 0, maximum value 1 with steps of 0.05.
+		
+		2.2)The last thing to get the volume working is by adding an automation. This can be done by pasting the code provided in CHROMECAST>automations.yaml, in your own automations.yaml and changing the media_players to the correct one.
+			Or you can do it with the UI from Home Assistant by going to Settings>Automations>ADD AUTOMATION. 
+	  
+	  3) Restart Home Assistant.
+	  
+	  4) If you want to have the same overview as the first picture in the README, choose the entities card and choose input_number.volume_radio, input_select.chromecast_radio, input_select.radio_station and script.radio .
+	
+	SONOS
+	  1) PLAYING RADIO STREAM ON SONOS
+		1.1)Make 2 helpers. First one is to choose the radio station, the second is for the device you want to play your radio on.
+			This can be done in 2 ways. If you want to use the code, it can be found in the CHROMECAST directory > helpers.yaml. Add this code to your configuration.yaml .
+			The other way is by going to Settings>Helpers>ADD HELPER and choosing 2 times input select. The first for the radio station, the second for media players.
+			Like you can see in the code, you have to add your options. You can use good looking names, it doesn't have to do anything with your media player or radio station stream.
+		
+		1.2)Now, let's make a script. The code can be found in the SONOS directory > scripts.yaml. Here you maybe need to add/change some if or elif statements depending on the options you've chosen at the helpers.
+			For the SONOS setup, you first have to add the radio station in the Sonos app. You can see the radio stations you've added by pressing  the little star on the bottem left. Adding a radio station can be done by choosing one in TuneIn, pressing the 3 dots on the right and pressing "Add station to My Sonos".
+			If the radio stations are added and they're showing up in Home Assistant. You have to go to Dev Tools and filter under "Current Entities" for the name of your Sonos. If you take a look at the attributes, you now should see "source_list:" with all the radio stations you've added.
+			Those are the names needed for the script. 
+			
+	  2) OPTIONAL: change the volume of your SONOS
+		2.1)If you want to change the volume of your SONOS, you'll need an extra helper. This code can be found in SONOS > volume-helper.yaml. 
+			Paste it in your configuration.yaml. Or make an helper by going to Settings>Helpers>ADD HELPER and choose Numeric. Minimum value 0, maximum value 1 with steps of 0.05.
+		
+		2.2)The last thing to get the volume working is by adding an automation. This can be done by pasting the code provided in SONOS>automations.yaml, in your own automations.yaml and changing the media_players to the correct one.
+			Or you can do it with the UI from Home Assistant by going to Settings>Automations>ADD AUTOMATION. 
+	  
+	  3) Restart Home Assistant.
+	  
+	  4) If you want to have the same overview as the first picture in the README, choose the entities card and choose input_number.volume_radio, input_select.chromecast_radio, input_select.radio_station and script.radio .	
+
+So now you can stream a radio station to your favorite casting device. Now let's setup the song resolver. It's based on scraping an HTML to get the current song. On https://onlineradiobox.com you can find lots of radio stations. Almost every radio station on this site has a playlist. 
+If you take a playlist from this site and replace the URL in my example, the scraping code will still work. Paste the code from /song_lookup/sensors.yaml to your sensors.yaml (or configuration.yaml) and add this block of code as many times as you need for all your radiostations. Don't forget the URL. 
+Restart Home Assistant and see in Developer Tools if the sensor you made is working.
+
+As you can see, the scan interval is very high. If you got several radiostations, you don't want it to constantly scrape the pages. Let's add an automation and script to scrape when necessary. The example code of the script can be found in /song_lookup/scripts.yaml. 
+Paste it to your scripts.yaml (or configuration.yaml) as many times as you have media_players where you want to know the songs from. Change the media_player and the sensors which you made for every radio station. 
+
+To end the guide, you need to add an automation to repeat the scrape from the site as long as the media_player is playing your radiostream. Copy the automation from /song_lookup/automations.yaml to your automations.yaml (or configuration.yaml) and add this code as many times as you got devices were you want to play your radio station on. 
+Change the media_player and the script name to the name you've chosen. 
