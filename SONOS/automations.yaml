@@ -1,0 +1,12 @@
+- alias: Set Radio Volume
+  trigger:
+    platform: state
+    entity_id: input_number.volume
+  action:
+    service: media_player.volume_set
+    data_template:
+      entity_id: >
+        {% if is_state("input_select.sonos_radio", "Keuken") %} media_player.sonos_keuken
+        {% elif is_state("input_select.sonos_radio", "Lounge") %} media_player.sonos_lounge
+        {% endif %} 
+      volume_level: '{{  states.input_number.volume.state  }}'

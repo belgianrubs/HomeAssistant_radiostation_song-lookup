@@ -1,0 +1,13 @@
+alias: Play Radio on Sonos Audio
+sequence:
+  - service: media_player.select_source
+    data_template:
+      entity_id: >
+        {% if is_state("input_select.sonos_radio", "Keuken") %} media_player.sonos_keuken 
+	{% elif is_state("input_select.sonos_radio", "Lounge") %} media_player.sonos_lounge 
+	{% endif %}
+      source: >
+        {% if is_state("input_select.radio_station", "Radio 1") %} VRT Radio 1
+	{% elif is_state("input_select.radio_station", "Qmusic") %} QMusic Belgium
+        {% endif %}
+mode: single
