@@ -1,0 +1,13 @@
+input_select:
+	radio_station:
+		name: 'Select radio station:'
+		options:
+            		- Radio 1
+			- Qmusic
+		icon: mdi:radio
+	chromecast_radio:
+		name: 'Select Chromecast:'
+		options:
+            		- Keuken
+			- Lounge
+        icon: mdi:speaker-wireless

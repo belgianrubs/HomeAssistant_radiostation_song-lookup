@@ -1,0 +1,26 @@
+radio:
+  alias: Play Radio on Chromecast Audio
+  sequence:
+  - service: media_player.play_media
+    data_template:
+      entity_id: >
+	{% if is_state("input_select.chromecast_radio", "Keuken") %} media_player.eetkamer
+        {% elif is_state("input_select.chromecast_radio", "Lounge") %} media_player.lounge
+        {% endif %}
+
+      media_content_id: >
+	{% if is_state("input_select.radio_station", "Radio 1") %} http://icecast.vrtcdn.be/radio1-mid.mp3 
+        {% elif is_state("input_select.radio_station", "Qmusic") %} https://21293.live.streamtheworld.com/QMUSIC.mp3
+        {% endif %}
+
+      media_content_type: music
+      extra:
+        thumb: >
+            {% if is_state("input_select.radio_station", "Radio 1") %} /local/radio/Radio_1.png
+            {% elif is_state("input_select.radio_station", "Qmusic") %} /local/radio/QMusic.jpg
+            {% endif %}
+        title: >
+            {% if is_state("input_select.radio_station", "Radio 1") %} Radio 1
+            {% elif is_state("input_select.radio_station","Qmusic") %} Qmusic 
+            {% endif %}
+            
