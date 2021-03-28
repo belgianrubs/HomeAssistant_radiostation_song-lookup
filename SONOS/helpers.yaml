@@ -3,11 +3,11 @@ input_select:
     name: 'Select radio station:'
     options:
     	- Radio 1
-	- Qmusic
+        - Qmusic
     icon: mdi:radio
   sonos_radio:
     name: 'Select SONOS:'
     options:
     	- Keuken
-	- Lounge
+        - Lounge
     icon: mdi:speaker-wireless
