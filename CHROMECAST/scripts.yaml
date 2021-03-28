@@ -4,12 +4,12 @@ radio:
   - service: media_player.play_media
     data_template:
       entity_id: >
-	{% if is_state("input_select.chromecast_radio", "Keuken") %} media_player.eetkamer
+        {% if is_state("input_select.chromecast_radio", "Keuken") %} media_player.eetkamer
         {% elif is_state("input_select.chromecast_radio", "Lounge") %} media_player.lounge
         {% endif %}
 
       media_content_id: >
-	{% if is_state("input_select.radio_station", "Radio 1") %} http://icecast.vrtcdn.be/radio1-mid.mp3 
+        {% if is_state("input_select.radio_station", "Radio 1") %} http://icecast.vrtcdn.be/radio1-mid.mp3 
         {% elif is_state("input_select.radio_station", "Qmusic") %} https://21293.live.streamtheworld.com/QMUSIC.mp3
         {% endif %}
 
