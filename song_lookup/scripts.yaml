@@ -5,6 +5,6 @@ song_lookup_lounge:
     target:
       entity_id: >
         {% if is_state_attr('media_player.lounge', 'media_title', 'Radio 1') %} sensor.radio_1 
-        {% elif is_state_attr('media_player.lounge', 'media_title', 'Qmusic') %} sensor.qmusic 
+        {% elif is_state_attr('media_player.lounge', 'media_title', 'MNMHits') %} sensor.MNMHits
         {% endif %}
   mode: single
