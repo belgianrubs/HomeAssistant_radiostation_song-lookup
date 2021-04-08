@@ -7,10 +7,10 @@ If you got some questions about this guide/code you can contact me or other comm
 You can find the guide, in guide.txt. 
 
 The end result of this guide goes to something that should like this (which is based on a topic from the HA forum https://bit.ly/38UJOug ):   
-![image](https://user-images.githubusercontent.com/80924413/111700871-4e6a4480-883a-11eb-933c-37405f2e8291.png)
+![image](https://user-images.githubusercontent.com/80924413/114016618-5468a980-986b-11eb-8a93-90e1ae20c095.png)
 
 added some things to the code so the media_player card would look nicer:  
-![image](https://user-images.githubusercontent.com/80924413/111803419-4f998100-88cf-11eb-91e7-3cb554335def.png)
+![image](https://user-images.githubusercontent.com/80924413/114016758-76fac280-986b-11eb-959d-a29fb5d53e6f.png)
 
 and this, which is an addition I made with some help from ESH's Discord members:
 ![image](https://user-images.githubusercontent.com/80924413/111699201-1c57e300-8838-11eb-9773-961620e0e397.png)
