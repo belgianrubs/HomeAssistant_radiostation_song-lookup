@@ -3,7 +3,7 @@ input_select:
     name: 'Select radio station:'
     options:
       	- Radio 1
-        - Qmusic
+        - MNMHits
     icon: mdi:radio
   chromecast_radio:
     name: 'Select Chromecast:'
